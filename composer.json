@@ -5,8 +5,11 @@
         {
             "name": "weibin",
             "email": "hiweibin@gmail.com",
-            "homepage": "https://weibin.me"
         }
+    ],
+    "keywords": [
+        "laravel",
+        "submail",
     ],
     "require": {
         "php": ">=5.5.0",
