@@ -4,12 +4,12 @@
     "authors": [
         {
             "name": "weibin",
-            "email": "hiweibin@gmail.com",
+            "email": "hiweibin@gmail.com"
         }
     ],
     "keywords": [
         "laravel",
-        "submail",
+        "submail"
     ],
     "require": {
         "php": ">=5.5.0",
