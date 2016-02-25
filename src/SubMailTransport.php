@@ -46,7 +46,7 @@ class SubMailTransport extends Transport
     $this->addQuery('reply', $this->getAddress($message->getReplyTo()));
     $this->addQuery('cc', $this->getAddresses($message->getCc()));
     $this->addQuery('bcc', $this->getAddresses($message->getBCc()));
-    $this->addQuery('asynchronous', true);
+    // $this->addQuery('asynchronous', true);
 
     if (!empty($message->getChildren())) {
       foreach ($message->getChildren() as $file) {
