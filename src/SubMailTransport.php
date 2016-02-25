@@ -42,14 +42,15 @@ class SubMailTransport extends Transport
   {
     $this->addQuery('subject', $message->getSubject());
     $this->addQuery('from', $this->getAddress($message->getFrom()));
-    $this->addQuery('fromname', $this->getFromName($message));
-    $this->addQuery('replyto', $this->getAddress($message->getReplyTo()));
+    $this->addQuery('from_name', $this->getFromName($message));
+    $this->addQuery('reply', $this->getAddress($message->getReplyTo()));
     $this->addQuery('cc', $this->getAddresses($message->getCc()));
     $this->addQuery('bcc', $this->getAddresses($message->getBCc()));
+    $this->addQuery('asynchronous', true);
 
     if (!empty($message->getChildren())) {
       foreach ($message->getChildren() as $file) {
-        $this->addQuery('files[]', $file->getBody(), $file->getFilename());
+        $this->addQuery('attachments[]', $file->getBody(), $file->getFilename());
       }
     }
     $this->query = array_filter($this->query);
