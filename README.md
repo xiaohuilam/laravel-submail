@@ -1,7 +1,7 @@
 # Laravel-SubMail
 
 ```
-composer require bingoo/submail
+composer require bingoo/laravel-submail
 ```
 
 config/app.php
