@@ -20,7 +20,7 @@ class SubMailServiceProvider extends ServiceProvider
                 $appid = config('services.submail.appid');
                 $appkey = config('services.submail.appkey');
 
-                return new SendCloudTransport($appid, $appkey);
+                return new SubMailTransport($appid, $appkey);
             });
         });
     }

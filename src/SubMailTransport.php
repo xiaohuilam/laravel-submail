@@ -10,7 +10,8 @@ use Swift_Mime_Message;
 
 class SubMailTransport extends Transport
 {
-  const URL     = 'https://api.submail.cn/mail/xsend';
+  const URL = 'https://api.submail.cn/mail/send';
+  const XURL = 'https://api.submail.cn/mail/xsend';
 
   private $query = [];
 
@@ -18,25 +19,27 @@ class SubMailTransport extends Transport
   {
     $this->addQuery('appid', $appid);
     $this->addQuery('appkey', $appkey);
+    $this->appid = $appid;
+    $this->appkey = $appkey;
   }
 
   protected function setSign()
   {
-    $this->addQuery('timestamp', time());
-    $this->addQuery('sign_type', 'sha1');
-    ksort($this->query);
-    $sign_str = '';
-    foreach ($this->query as $key => $val) {
-      $sign_str .= $sign_str == '' ? $key . '=' . $val : '&' . $key . '=' . $val;
-    }
-    $sign_str = $this->query['appid'] . $this->query['appkey'] . $sign_str . $this->query['appid'] . $this->query['appkey'];
-    $this->addQuery('signature', sha1($sign_str));
+    // $this->addQuery('timestamp', time());
+    // $this->addQuery('sign_type', 'sha1');
+    // ksort($this->query);
+    // $sign_str = '';
+    // foreach ($this->query as $q) {
+    //   $sign_str .= $sign_str == '' ? $q['name'] . '=' . $q['contents'] : '&' . $q['name'] . '=' . $q['contents'];
+    // }
+    // $sign_str = $this->appid . $this->appkey . $sign_str . $this->appid . $this->appkey;
+    // $this->addQuery('signature', sha1($sign_str));
+    $this->addQuery('signature', $this->appkey);
   }
 
 
   public function send(Swift_Mime_Message $message, &$failedRecipients = null)
   {
-    $this->setSign();
     $this->addQuery('subject', $message->getSubject());
     $this->addQuery('from', $this->getAddress($message->getFrom()));
     $this->addQuery('fromname', $this->getFromName($message));
@@ -49,11 +52,9 @@ class SubMailTransport extends Transport
         $this->addQuery('files[]', $file->getBody(), $file->getFilename());
       }
     }
-
     $this->query = array_filter($this->query);
-
     $body = $message->getBody();
-
+    $this->setSign();
     if ($body instanceof SubMailTemplate) {
       $this->sendTemplate($message);
     } else {
@@ -101,7 +102,6 @@ class SubMailTransport extends Transport
     $response = $http->post(self::URL, [
       'multipart' => $this->query,
     ]);
-
     return $this->response($response);
   }
 
@@ -110,11 +110,12 @@ class SubMailTransport extends Transport
     $http = new Client();
 
     $template = $message->getBody();
+    $this->addQuery('to', $this->getAddress($message->getTo()));
     $this->addQuery('project', $template->getProject());
     $this->addQuery('vars', json_encode($template->getVars()));
     $this->addQuery('links', json_encode($template->getLinks()));
 
-    $response = $http->post(self::URL, [
+    $response = $http->post(self::XURL, [
       'multipart' => $this->query,
     ]);
 
@@ -126,8 +127,8 @@ class SubMailTransport extends Transport
   {
     $res = json_decode($response->getBody()->getContents());
 
-    if (isset($res->errors)) {
-      throw new SubMailException(array_get($res->errors, 0));
+    if ($res->status == 'error') {
+      throw new SubMailException($res->msg);
     }
 
     return true;

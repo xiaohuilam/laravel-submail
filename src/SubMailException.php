@@ -1,6 +1,6 @@
 <?php
 
-namespace Binooo\Mail;
+namespace Bingoo\Mail;
 
 use Exception;
 

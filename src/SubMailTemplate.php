@@ -26,7 +26,7 @@ class SubMailTemplate
     {
         $data = [];
         foreach ($this->vars as $key => $value) {
-            $data["%$key%"] = [$value];
+            $data[$key] = $value;
         }
         return $data;
     }
@@ -35,7 +35,7 @@ class SubMailTemplate
     {
         $data = [];
         foreach ($this->links as $key => $value) {
-            $data["%$key%"] = [$value];
+            $data[$key] = $value;
         }
         return $data;
     }
