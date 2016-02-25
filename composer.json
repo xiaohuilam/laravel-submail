@@ -1,0 +1,21 @@
+{
+    "name": "bingoo/submail",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "weibin",
+            "email": "hiweibin@gmail.com",
+            "homepage": "https://weibin.me"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/support": "5.1.*",
+        "guzzlehttp/guzzle": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bingoo\\Mail\\": "src/"
+        }
+    }
+}
