@@ -1,14 +1,14 @@
 # Laravel-SubMail
 
 ```
-composer require bingoo/laravel-submail
+composer require bingooo/laravel-submail
 ```
 
 config/app.php
 
 ```php
 'providers' => [
-    Bingoo\Mail\SubMailServiceProvider::class,
+    Bingooo\Mail\SubMailServiceProvider::class,
 ];
 ```
 
@@ -33,7 +33,7 @@ Mail::send('emails.welcome', $data, function ($message) {
 ```php
 $vars = ['name' => 'hi','link_text' => 'http://example.com'];
 $links = ['link' => 'http://example.com'];
-$template = new Bingoo\Mail\SubMailTemplate('XXXXX', $vars, $links);
+$template = new Bingooo\Mail\SubMailTemplate('XXXXX', $vars, $links);
 \Mail::raw($template,function($message){
   $message->from('foo@example.com', 'XXXXX');
   $message->to('foo@example.com');

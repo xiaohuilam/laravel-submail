@@ -1,5 +1,5 @@
 <?php
-namespace Bingoo\Mail;
+namespace Bingooo\Mail;
 
 use Illuminate\Mail\TransportManager;
 use Illuminate\Support\ServiceProvider;

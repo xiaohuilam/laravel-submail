@@ -1,10 +1,9 @@
 {
-    "name": "bingoo/laravel-submail",
+    "name": "bingooo/laravel-submail",
     "license": "MIT",
     "authors": [
         {
-            "name": "weibin",
-            "email": "hiweibin@gmail.com"
+            "name": "bingooo",
         }
     ],
     "keywords": [
@@ -18,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Bingoo\\Mail\\": "src/"
+            "Bingooo\\Mail\\": "src/"
         }
     }
 }

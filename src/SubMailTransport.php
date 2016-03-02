@@ -1,6 +1,6 @@
 <?php
 
-namespace Bingoo\Mail;
+namespace Bingooo\Mail;
 
 use GuzzleHttp\Client;
 use Illuminate\Mail\Transport\Transport;
