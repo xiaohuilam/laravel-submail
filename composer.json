@@ -1,5 +1,5 @@
 {
-    "name": "bingooo/laravel-submail",
+    "name": "xiaohuilam/laravel-submail",
     "license": "MIT",
     "authors": [
         {
@@ -12,12 +12,18 @@
     ],
     "require": {
         "php": ">=5.5.0",
-        "illuminate/support": "5.1.*",
-        "guzzlehttp/guzzle": "^6.1"
+        "illuminate/support": "5.*"
     },
     "autoload": {
         "psr-4": {
             "Bingooo\\Mail\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bingooo\\Mail\\SubMailServiceProvider"
+            ]
         }
     }
 }
