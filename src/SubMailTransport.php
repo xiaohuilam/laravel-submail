@@ -50,6 +50,9 @@ class SubMailTransport extends Transport
 
     if (!empty($message->getChildren())) {
       foreach ($message->getChildren() as $file) {
+        if ($file instanceof \Swift_MimePart) {
+          continue;
+        }
         $this->addQuery('attachments[]', $file->getBody(), $file->getFilename());
       }
     }
@@ -72,7 +75,7 @@ class SubMailTransport extends Transport
     return array_get(array_keys($data), 0, null);
   }
 
-  protected function getFromName(Swift_Mime_Message $message)
+  protected function getFromName($message)
   {
     return array_get(array_values($message->getFrom()), 0);
   }
@@ -93,7 +96,7 @@ class SubMailTransport extends Transport
   }
 
 
-  protected function sendRawMessage(Swift_Mime_Message $message)
+  protected function sendRawMessage($message)
   {
     $http = new Client();
 
