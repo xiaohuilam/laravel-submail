@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Mail\Transport\Transport;
 use Psr\Http\Message\ResponseInterface;
 use Swift_Mime_Message;
-
+use Swift_Mime_SimpleMessage;
 
 class SubMailTransport extends Transport
 {
@@ -38,7 +38,7 @@ class SubMailTransport extends Transport
   }
 
 
-  public function send(Swift_Mime_Message $message, &$failedRecipients = null)
+  public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
   {
     $this->addQuery('subject', $message->getSubject());
     $this->addQuery('from', $this->getAddress($message->getFrom()));
